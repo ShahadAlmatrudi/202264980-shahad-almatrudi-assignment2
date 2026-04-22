@@ -147,18 +147,59 @@ document.addEventListener("DOMContentLoaded", () => {
     filterProjects();
   });
 
-  // =========================
-  // 6) Contact Form
-  // =========================
-  const form = document.getElementById("contact-form");
-  const statusEl = document.getElementById("form-status");
+// =========================
+// 6) Contact Form Validation
+// =========================
+const form = document.getElementById("contact-form");
+const statusEl = document.getElementById("form-status");
 
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    statusEl.textContent = "Message sent successfully!";
-    statusEl.classList.add("success");
-    form.reset();
-  });
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const messageInput = document.getElementById("message");
+
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const message = messageInput.value.trim();
+
+  [nameInput, emailInput, messageInput].forEach((field) =>
+    field.classList.remove("input-error")
+  );
+
+  statusEl.className = "form-status";
+  statusEl.textContent = "";
+
+  let hasError = false;
+
+  if (name.length < 2) {
+    nameInput.classList.add("input-error");
+    hasError = true;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    emailInput.classList.add("input-error");
+    hasError = true;
+  }
+
+  if (message.length < 10) {
+    messageInput.classList.add("input-error");
+    hasError = true;
+  }
+
+  if (hasError) {
+    statusEl.textContent =
+      "Please enter a valid name, email, and a message of at least 10 characters.";
+    statusEl.classList.add("error");
+    return;
+  }
+
+  statusEl.textContent = "Message sent successfully!";
+  statusEl.classList.add("success");
+  form.reset();
+});
 
   // =========================
   // 7) GitHub API
