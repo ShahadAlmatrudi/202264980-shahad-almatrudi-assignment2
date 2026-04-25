@@ -11,6 +11,12 @@ It builds on my previous assignments by improving interactivity, adding dynamic 
 
 ---
 
+## Demo Video
+
+https://drive.google.com/file/d/1qta4ZP8XGo50KCWnFFtdyhuNt79a1V-e/view?usp=sharing
+
+---
+
 ## 📖 Overview
 
 The goal of this project is to present my work in a clean and structured way while applying modern web development concepts.  
